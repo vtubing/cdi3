@@ -1,4 +1,12 @@
-#[derive(Debug, Clone, serde::Serialize, serde::Deserialize)]
+mod parameter;
+mod parameter_group;
+mod part;
+
+pub use parameter::Parameter;
+pub use parameter_group::ParameterGroup;
+pub use part::Part;
+
+#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "PascalCase")]
 #[serde(deny_unknown_fields)]
 #[remain::sorted]
@@ -9,33 +17,4 @@ pub struct DisplayInfo3 {
   pub parameters: Vec<Parameter>,
   pub parts: Vec<Part>,
   pub version: u8,
-}
-
-#[derive(Debug, Clone, serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "PascalCase")]
-#[serde(deny_unknown_fields)]
-#[remain::sorted]
-pub struct Parameter {
-  pub group_id: String,
-  pub id: String,
-  pub name: String,
-}
-
-#[derive(Debug, Clone, serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "PascalCase")]
-#[serde(deny_unknown_fields)]
-#[remain::sorted]
-pub struct ParameterGroup {
-  pub group_id: String,
-  pub id: String,
-  pub name: String,
-}
-
-#[derive(Debug, Clone, serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "PascalCase")]
-#[serde(deny_unknown_fields)]
-#[remain::sorted]
-pub struct Part {
-  pub id: String,
-  pub name: String,
 }
